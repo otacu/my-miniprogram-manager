@@ -1,0 +1,276 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.egoist.miniprogram.dao.RoutePointMapper">
+  <resultMap id="BaseResultMap" type="com.egoist.miniprogram.pojo.RoutePoint">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="open_id" jdbcType="VARCHAR" property="openId" />
+    <result column="marker_id" jdbcType="BIGINT" property="markerId" />
+    <result column="poi_id" jdbcType="VARCHAR" property="poiId" />
+    <result column="longitude" jdbcType="VARCHAR" property="longitude" />
+    <result column="latitude" jdbcType="VARCHAR" property="latitude" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="address" jdbcType="VARCHAR" property="address" />
+    <result column="order" jdbcType="INTEGER" property="order" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    `id`, `open_id`, `marker_id`, `poi_id`, `longitude`, `latitude`, `name`, `address`,
+    `order`
+  </sql>
+  <select id="selectByExample" parameterType="com.egoist.miniprogram.pojo.RoutePointExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from tb_miniprogram_route_point
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from tb_miniprogram_route_point
+    where `id` = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from tb_miniprogram_route_point
+    where `id` = #{id,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.egoist.miniprogram.pojo.RoutePointExample">
+    delete from tb_miniprogram_route_point
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.egoist.miniprogram.pojo.RoutePoint">
+    insert into tb_miniprogram_route_point (`id`, `open_id`, `marker_id`,
+    `poi_id`, `longitude`, `latitude`,
+    `name`, `address`, `order`
+    )
+    values (#{id,jdbcType=BIGINT}, #{openId,jdbcType=VARCHAR}, #{markerId,jdbcType=BIGINT},
+    #{poiId,jdbcType=VARCHAR}, #{longitude,jdbcType=VARCHAR}, #{latitude,jdbcType=VARCHAR},
+    #{name,jdbcType=VARCHAR}, #{address,jdbcType=VARCHAR}, #{order,jdbcType=INTEGER}
+    )
+  </insert>
+  <insert id="insertSelective" parameterType="com.egoist.miniprogram.pojo.RoutePoint">
+    insert into tb_miniprogram_route_point
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        `id`,
+      </if>
+      <if test="openId != null">
+        `open_id`,
+      </if>
+      <if test="markerId != null">
+        `marker_id`,
+      </if>
+      <if test="poiId != null">
+        `poi_id`,
+      </if>
+      <if test="longitude != null">
+        `longitude`,
+      </if>
+      <if test="latitude != null">
+        `latitude`,
+      </if>
+      <if test="name != null">
+        `name`,
+      </if>
+      <if test="address != null">
+        `address`,
+      </if>
+      <if test="order != null">
+        `order`,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="openId != null">
+        #{openId,jdbcType=VARCHAR},
+      </if>
+      <if test="markerId != null">
+        #{markerId,jdbcType=BIGINT},
+      </if>
+      <if test="poiId != null">
+        #{poiId,jdbcType=VARCHAR},
+      </if>
+      <if test="longitude != null">
+        #{longitude,jdbcType=VARCHAR},
+      </if>
+      <if test="latitude != null">
+        #{latitude,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null">
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="address != null">
+        #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="order != null">
+        #{order,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.egoist.miniprogram.pojo.RoutePointExample" resultType="java.lang.Long">
+    select count(*) from tb_miniprogram_route_point
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update tb_miniprogram_route_point
+    <set>
+      <if test="record.id != null">
+        `id` = #{record.id,jdbcType=BIGINT},
+      </if>
+      <if test="record.openId != null">
+        `open_id` = #{record.openId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.markerId != null">
+        `marker_id` = #{record.markerId,jdbcType=BIGINT},
+      </if>
+      <if test="record.poiId != null">
+        `poi_id` = #{record.poiId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.longitude != null">
+        `longitude` = #{record.longitude,jdbcType=VARCHAR},
+      </if>
+      <if test="record.latitude != null">
+        `latitude` = #{record.latitude,jdbcType=VARCHAR},
+      </if>
+      <if test="record.name != null">
+        `name` = #{record.name,jdbcType=VARCHAR},
+      </if>
+      <if test="record.address != null">
+        `address` = #{record.address,jdbcType=VARCHAR},
+      </if>
+      <if test="record.order != null">
+        `order` = #{record.order,jdbcType=INTEGER},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update tb_miniprogram_route_point
+    set `id` = #{record.id,jdbcType=BIGINT},
+    `open_id` = #{record.openId,jdbcType=VARCHAR},
+    `marker_id` = #{record.markerId,jdbcType=BIGINT},
+    `poi_id` = #{record.poiId,jdbcType=VARCHAR},
+    `longitude` = #{record.longitude,jdbcType=VARCHAR},
+    `latitude` = #{record.latitude,jdbcType=VARCHAR},
+    `name` = #{record.name,jdbcType=VARCHAR},
+    `address` = #{record.address,jdbcType=VARCHAR},
+    `order` = #{record.order,jdbcType=INTEGER}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.egoist.miniprogram.pojo.RoutePoint">
+    update tb_miniprogram_route_point
+    <set>
+      <if test="openId != null">
+        `open_id` = #{openId,jdbcType=VARCHAR},
+      </if>
+      <if test="markerId != null">
+        `marker_id` = #{markerId,jdbcType=BIGINT},
+      </if>
+      <if test="poiId != null">
+        `poi_id` = #{poiId,jdbcType=VARCHAR},
+      </if>
+      <if test="longitude != null">
+        `longitude` = #{longitude,jdbcType=VARCHAR},
+      </if>
+      <if test="latitude != null">
+        `latitude` = #{latitude,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null">
+        `name` = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="address != null">
+        `address` = #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="order != null">
+        `order` = #{order,jdbcType=INTEGER},
+      </if>
+    </set>
+    where `id` = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.egoist.miniprogram.pojo.RoutePoint">
+    update tb_miniprogram_route_point
+    set `open_id` = #{openId,jdbcType=VARCHAR},
+      `marker_id` = #{markerId,jdbcType=BIGINT},
+      `poi_id` = #{poiId,jdbcType=VARCHAR},
+      `longitude` = #{longitude,jdbcType=VARCHAR},
+      `latitude` = #{latitude,jdbcType=VARCHAR},
+      `name` = #{name,jdbcType=VARCHAR},
+      `address` = #{address,jdbcType=VARCHAR},
+      `order` = #{order,jdbcType=INTEGER}
+    where `id` = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

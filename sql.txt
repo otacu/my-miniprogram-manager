@@ -1,0 +1,13 @@
+CREATE TABLE `miniprogram`.`tb_miniprogram_route_point` (
+  `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT COMMENT '自增id',
+  `open_id` varchar(50) DEFAULT NULL COMMENT '微信应用用户openId',
+  `marker_id` bigint(20) unsigned DEFAULT NULL COMMENT '覆盖物id',
+  `poi_id` varchar(20) DEFAULT NULL COMMENT 'poi点id',
+  `longitude` varchar(20) DEFAULT NULL COMMENT '经度',
+  `latitude` varchar(20) DEFAULT NULL COMMENT '纬度',
+  `name` varchar(255) DEFAULT NULL COMMENT '名称',
+  `address` varchar(255) DEFAULT NULL COMMENT '地址',
+  `order` int(10) unsigned DEFAULT NULL COMMENT '在路线中的序号',
+  PRIMARY KEY (`id`),
+  KEY `index_open_id` (`open_id`) USING BTREE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='路线点表';
